@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition>
+		<p:breadCrumb styleClass="breadCrumbCls">
+			<p:menuitem value="home" title="home" />
+			<p:menuitem value="Filieres"
+						actionListener="#{filiereBean.listHandler()}"
+						ajax="true"
+						update="mainPanel"
+			 />
+			<p:menuitem value="#{filiereBean.menuLabel}" />
+		</p:breadCrumb>
+		
+		<p:separator />
+		<p:menubar styleClass="menuBarCls" autoDisplay="false">
+			<p:menuitem value=" Liste"
+						icon="pi pi-file-o"
+						actionListener="#{filiereBean.listHandler()}"
+						ajax="true"
+						update="mainPanel"
+						rendered="#{!filiereBean.menuLabel.equals('Liste')}"/>
+			<p:menuitem value=" Ajout"
+						icon="pi pi-plus-circle"
+						actionListener="#{filiereBean.addHandler()}"
+						ajax="true"
+						update="mainPanel"
+						rendered="#{!filiereBean.menuLabel.equals('Ajout')}"/>
+			<p:menuitem ajax="false"
+						value=" Excel"
+						icon="pi pi-file-excel"
+						rendered="#{!filiereBean.rendermenuItems}">
+					<p:dataExporter type="xlsxstream" target="tableFiliere" fileName="filiereList" />
+			</p:menuitem>
+			<p:menuitem ajax="false"
+						value=" PDF"
+						icon="pi pi-file-pdf"
+						rendered="#{!filiereBean.rendermenuItems}">
+					<p:dataExporter type="pdf" target="tableFiliere" fileName="filieresList" />
+			</p:menuitem>
+		</p:menubar>
+		
+	</ui:composition>
+</body>
+</html>

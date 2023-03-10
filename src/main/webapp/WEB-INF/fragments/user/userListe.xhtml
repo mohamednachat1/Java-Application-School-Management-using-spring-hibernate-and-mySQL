@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition>
+		<p:panel header="Liste des utilisateurs" style="margin-bottom:10px;width:100%;text-align:center;font-weight:bold" id="panel-user">
+		 	<p:dataTable id="tableUser" var="user" value="#{userBean.users}" widgetVar="carsTable" multiViewState="true"
+		                 rows="10" paginator="true"
+		                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		                 rowsPerPageTemplate="5,10,15"
+		                 selectionMode="single" 
+		                 rowKey="#{user.id}"
+		                 emptyMessage="Aucune user exist" 
+		                 filteredValue="#{userBean.usersFilitred}">
+		                 
+		        <p:column headerText="Id" filterBy="#{user.id}" sortBy="#{user.id}" filterMatchMode="contains">
+		            <h:outputText value="#{user.id}" />
+		        </p:column>
+		        
+		        <p:column headerText="Nom" filterBy="#{user.nom}" sortBy="#{user.nom}" filterMatchMode="startsWith">
+		            <h:outputText value="#{user.nom}" />
+		        </p:column>
+		 
+		        <p:column headerText="Prenom" filterBy="#{user.prenom}" sortBy="#{user.prenom}" filterMatchMode="startsWith">
+		            <h:outputText value="#{user.prenom}" />
+		        </p:column>
+		        
+		        <p:column headerText="Login" filterBy="#{user.login}" sortBy="#{user.login}" filterMatchMode="startsWith">
+		            <h:outputText value="#{user.login}" />
+		        </p:column>
+		        
+		        <p:column headerText="Dernier Connexion" filterBy="#{userBean.lastDate(user.lastLogin)}" sortBy="#{userBean.lastDate(user.lastLogin)}" filterMatchMode="startsWith">
+		            <h:outputText value="#{userBean.lastDate(user.lastLogin)}" />
+		        </p:column>
+		        
+		        <p:column headerText="Options" style="text-align:center" exportable="false">
+    				<p:commandButton update="userDetail"
+    								 id="btn-view" 
+    								 style="margin-right:10px;" 
+    								 icon="pi pi-eye" 
+    								 title="Quick view"
+    								 oncomplete="PF('userDialog').show()">
+				                     <f:setPropertyActionListener value="#{user}" target="#{userBean.viewUser}" />
+					</p:commandButton>
+					
+					<p:commandButton 
+    								 id="btn-edit"
+    								 icon="pi pi-pencil" 
+    								 style="margin-right:10px;"
+    								 title="Edit"
+    								 update="mainPanel" 
+    								 action="#{userBean.showHandler(user)}">
+					</p:commandButton>
+					
+					<p:commandButton icon="pi pi-trash" 
+				     				  action="#{userBean.deleteUser(user)}" 
+				     				  id="btn-delete"
+				     				  title="Delete"
+				     				  update="mygrowl,mainPanel">
+				        <p:confirm header="Confirmation" message="Voulez vous vraiment supprimer s'utilisateur ?" icon="pi pi-exclamation-triangle" />
+				    </p:commandButton>
+								     
+				    <p:confirmDialog 	global="true" 
+				    					showEffect="fade" 
+				    					hideEffect="fade">
+				    					<div style="text-align:center">
+									        <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+									        <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+								        </div>
+				    </p:confirmDialog>   
+					
+		        </p:column>
+		    </p:dataTable>
+		</p:panel>
+	</ui:composition>
+</body>
+</html>

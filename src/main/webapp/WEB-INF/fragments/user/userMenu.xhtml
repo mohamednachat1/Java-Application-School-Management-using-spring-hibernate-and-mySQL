@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition>
+		<p:breadCrumb styleClass="breadCrumbCls">
+			<p:menuitem value="Utilisateur" title="Utilisateur" />
+			<p:menuitem value="Utilisateur"
+						actionListener="#{userBean.listHandler()}"
+						ajax="true"
+						update="mainPanel"
+			 />
+			<p:menuitem value="#{userBean.menuLabel}" />
+		</p:breadCrumb>
+		
+		<p:separator />
+		<p:menubar styleClass="menuBarCls" autoDisplay="false">
+			<p:menuitem value=" Liste"
+						icon="pi pi-file-o"
+						actionListener="#{userBean.listHandler()}"
+						ajax="true"
+						update="mainPanel"
+						rendered="#{!userBean.menuLabel.equals('Liste')}"/>
+			<p:menuitem value=" Ajout"
+						icon="pi pi-plus-circle"
+						actionListener="#{userBean.addHandler()}"
+						ajax="true"
+						update="mainPanel"
+						rendered="#{!userBean.menuLabel.equals('Ajout')}"/>
+			<p:menuitem value=" Excel"
+						ajax="false"
+						icon="pi pi-file-excel"
+						rendered="#{!userBean.rendermenuItems}">
+					<p:dataExporter type="xlsxstream" target="tableUser" fileName="users" />
+			</p:menuitem>
+			<p:menuitem value=" PDF"
+						ajax="false"
+						icon="pi pi-file-pdf"
+						rendered="#{!userBean.rendermenuItems}">
+					<p:dataExporter type="pdf" target="tableUser" fileName="users" options="" />
+			</p:menuitem>
+		</p:menubar>
+	</ui:composition>
+</body>
+</html>

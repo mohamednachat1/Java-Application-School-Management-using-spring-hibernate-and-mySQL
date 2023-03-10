@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<h:outputStylesheet name="primeflex.min.css" />
+</h:head> 
+<body>
+<div class="card">
+	<ui:composition>
+			<h:form>
+				<ui:include src="DashboardMenu.xhtml" /><br /><br />
+					<h:panelGrid columns="2"
+			        			 style="width:100%;max-width:100%;height: 100%;"
+			        			 cellspacing="8">
+							<p:barChart model="#{dashboardBean.barModel}" style="width:100%;max-width:600px"/>
+							<p:pieChart model="#{dashboardBean.pieModel}" style="width: 100%; max-width: 500px;"/>
+					</h:panelGrid>
+			</h:form>
+		</ui:composition>
+</div>
+</body> 
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition>
+		<p:breadCrumb styleClass="breadCrumbCls">
+			<p:menuitem value="home" title="home" />
+			<p:menuitem value="Etudiants"
+						actionListener="#{etudiantBean.listHandler()}"
+						ajax="true"
+						update="mainPanel"
+			 />
+			<p:menuitem value="#{etudiantBean.menuLabel}" />
+		</p:breadCrumb>
+		
+		<p:separator />
+		<p:menubar styleClass="menuBarCls" autoDisplay="false">
+			<p:menuitem value=" Liste"
+						icon="pi pi-file-o"
+						actionListener="#{etudiantBean.listHandler()}"
+						ajax="true"
+						update="mainPanel"
+						rendered="#{!(etudiantBean.menuLabel.equals('Liste'))}"/>
+			<p:menuitem value=" Ajout"
+						icon="pi pi-plus-circle"
+						actionListener="#{etudiantBean.addHandler()}"
+						ajax="true"
+						update="mainPanel"
+						rendered="#{!etudiantBean.menuLabel.equals('Ajout')}"/>
+			<p:menuitem value=" Excel"
+						ajax="false"
+						icon="pi pi-file-excel"
+						rendered="#{!etudiantBean.rendermenuItems}">
+					<p:dataExporter type="xlsxstream" target="tableEtudiant" fileName="etudiantList" />
+			</p:menuitem>
+			<p:menuitem value=" PDF"
+						ajax="false"
+						icon="pi pi-file-pdf"
+						rendered="#{!etudiantBean.rendermenuItems}">
+					<p:dataExporter type="pdf" target="tableEtudiant" fileName="etudiantList" />
+			</p:menuitem>
+		</p:menubar>
+		
+	</ui:composition>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+<style>
+.containerError{
+	background-color: #f5f5f5;
+	width:50%;
+	margin-left:25%;
+	height:auto;
+	margin-top:150px;
+	border-radius: 10px;
+}
+</style>
+</h:head> 
+<body> 
+  <div class="containerError">
+	<h:panelGrid columns="2" 
+   				 cellpadding="5"
+   				 style="text-align:left;">
+		<h:panelGroup style="position:relative" id="panelGroup">
+	 		<p:graphicImage alt="Logos" url="/resources/images/GEcole.png" style="width:250px" />
+	 		<br /><center>Sorry!! Page not found 404!</center>
+	 	</h:panelGroup>
+	 	<p:graphicImage alt="Logos" url="/resources/images/404_error.png" style="width:100%;" />
+ 	</h:panelGrid>
+  </div>
+</body>
+</html>

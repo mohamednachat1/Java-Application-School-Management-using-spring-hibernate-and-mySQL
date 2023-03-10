@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+
+<h:head></h:head> 
+<body> 
+<div class="card">
+    <h:form>
+        <p:menubar>
+            <p:menuitem label="Home" icon="pi pi-fw pi-home" update="mainPanel" action="#{globalBean.home()}">
+            	Home
+            </p:menuitem>
+
+	        <p:menuitem value="Etudiants" icon="pi pi-fw pi-users"  update="mainPanel" action="#{globalBean.etudiant()}"/>
+            
+       	    <p:menuitem value="Filieres" icon="pi pi-fw pi-list"  update="mainPanel" action="#{globalBean.filiere()}"/>
+            
+            <p:menuitem value="Users" icon="pi pi-fw pi-user"  update="mainPanel" action="#{globalBean.userDone()}"/>
+                        
+            <p:divider layout="vertical"/>
+            <p:menuitem label="Users" value="Bonjour  #{globalBean.currentuser.nom}" disabled="true">
+            </p:menuitem>
+            <p:divider layout="vertical"/>
+            <p:menuitem label="Users" value="Last Login: #{globalBean.lastLoginOfUser}" disabled="true">
+            </p:menuitem>
+            <p:menuitem disabled="true">
+            	<div class="ui-inputgroup">
+                	<h:form prependId="false">
+ 						<p:ajaxStatus id="ajaxSt">
+ 							<f:facet name="start">
+ 								<i style="font-size: 20px;" class="pi pi-spin pi-spinner" />
+ 							</f:facet>
+ 							<f:facet name="complete">
+ 								<h:outputText value=""/>
+ 							</f:facet>
+ 						</p:ajaxStatus>
+ 					</h:form>
+                </div>
+            </p:menuitem>
+            <f:facet name="options">
+                <div class="ui-inputgroup">
+                    <p:autoComplete id="etudiantautocomplet" 
+	 										size="36"
+	 										placeholder="Quick search by CNE ..."
+	 										forceSelection="true"
+	 										value="#{etudiantBean.completeEtudiant}"
+	 										completeMethod="#{etudiantBean.completesEtudiant}"
+	 										maxResults="10"
+	 										var="e"
+	 										itemValue="#{e}"
+	 										itemLabel="#{etudiantBean.completeEtudiantLabel(e)}"
+	 										converter="#{etudiantConverter}"/>
+                    <p:commandButton 
+                    				icon="pi pi-search" 
+                    				styleClass="ui-button-warning"
+                    				actionListener="#{etudiantBean.quickSearch()}"
+									update="mygrowl,etudiantautocomplet,mainPanel"
+									/>
+					<p:commandButton value="Logout" 
+                				 actionListener="#{globalBean.logout()}" 
+                				 icon="pi pi-fw pi-sign-out" 
+                				 styleClass="ui-button-info" style="margin-left:10px"
+                				 />
+                </div>
+            </f:facet>
+        </p:menubar>
+    </h:form>
+</div>
+</body> 
+</html>

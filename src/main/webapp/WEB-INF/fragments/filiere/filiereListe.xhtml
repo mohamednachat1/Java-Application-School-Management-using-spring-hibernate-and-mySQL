@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition>
+		<p:panel header="Liste des filieres" style="margin-bottom:10px;width:100%;text-align:center;font-weight:bold" id="panel-filiere">
+		 	<p:dataTable id="tableFiliere" var="filiere" value="#{filiereBean.filieres}" widgetVar="carsTable" multiViewState="true"
+		                 rows="10" paginator="true"
+		                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		                 rowsPerPageTemplate="5,10,15"
+		                 selectionMode="single" selection="#{filiereBean.filiereSelected}" rowKey="#{filiere.id}"
+		                 emptyMessage="Aucune filiere exist" filteredValue="#{filiereBean.filieresFilitred}">
+		                 
+		        <p:column headerText="Id" filterBy="#{filiere.id}" sortBy="#{filiere.id}" filterMatchMode="contains">
+		            <h:outputText value="#{filiere.id}" />
+		        </p:column>
+		 
+		        <p:column headerText="Libelle" filterBy="#{filiere.libelle}" sortBy="#{filiere.libelle}" filterMatchMode="startsWith">
+		            <h:outputText value="#{filiere.libelle}" />
+		        </p:column>
+		 
+		        <p:column headerText="Code" filterBy="#{filiere.code}" sortBy="#{filiere.code}" filterMatchMode="startsWith">
+		            <h:outputText value="#{filiere.code}" />
+		        </p:column>
+		 
+		        <p:column headerText="Nombre d'etudiants" filterBy="#{filiereBean.nbrEtudiant(filiere.id)}" sortBy="#{filiereBean.nbrEtudiant(filiere.id)}" filterMatchMode="contains">
+		            <h:outputText value="#{filiereBean.nbrEtudiant(filiere.id)}" />
+		        </p:column>
+		        
+		        <p:column headerText="Options" style="text-align:center" exportable="false">
+					<p:commandButton update="filiereDetail"
+    								 id="btn-view" 
+    								 style="margin-right:10px;" 
+    								 icon="pi pi-eye" 
+    								 title="Quick view"
+    								 oncomplete="PF('filiereDialog').show()">
+				                     <f:setPropertyActionListener value="#{filiere}" target="#{filiereBean.viewFiliere}" />
+					</p:commandButton>
+					
+					<p:commandButton 
+    								 id="btn-edit"
+    								 style="margin-right:10px;"
+    								 icon="pi pi-pencil" 
+    								 title="Edit" >
+ 									 <p:ajax update="mainPanel" listener="#{filiereBean.showHandler(filiere)}" />
+					</p:commandButton>
+					
+					<p:commandButton icon="pi pi-trash"
+				     				  action="#{filiereBean.deleteFiliere(filiere)}" 
+				     				  id="btn-delete"
+				     				  title="Delete"
+				     				  update="mygrowl,mainPanel">
+				        <p:confirm header="Confirmation" message="Voulez vous vraiment supprimer cette filiere ?" icon="pi pi-exclamation-triangle" />
+				    </p:commandButton>
+								     
+				    <p:confirmDialog 	global="true"
+				    					showEffect="fade"
+				    					hideEffect="fade">
+				    					<div style="text-align:center">
+									        <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+									        <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+				    					</div>
+				    </p:confirmDialog>   
+		        </p:column> 
+		 
+		    </p:dataTable>
+		</p:panel>
+	</ui:composition>
+</body>
+</html>

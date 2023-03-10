@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:composition>
+		<h:form prependId="false">
+		<center>
+			<p:dialog  	widgetVar="aboutDialog"
+					 	header="A prorpos"
+					 	width="500"
+						height="auto"
+					 	modal="true"
+					 	resizable="false"
+					 	showEffect="explode"
+					 	hideEffect="explode">
+					 	<div class="aboutDialogImg">
+							<img src="./resource/images/logo.png" alt="Logo" />
+					 	</div>
+					 	<br />
+					 	<div style="width: 100%;">
+					 		Concu et Developpe par:<br />
+					 		<div style="width: 100%;text-align: center">
+					 			<span style="font-size: 18;color:teal;">MOHAMED NACHAT</span><br /><br />
+					 			
+					 			Etudiant<br />
+					 			Universite Abdelmalek Essaadi-FPLarache<br />
+					 			Departement Informatique
+					 		</div>
+					 	</div>
+					 	<p:separator />
+					 	<div>
+					 		Copyright &copy; FPL - Departement Informatique
+					 	</div>
+			</p:dialog>
+		</center>
+			<p:dialog  	widgetVar="etudiantDialog"
+					 	header="Etudiant"
+					 	width="400"
+					 	height="auto"
+					 	modal="true"
+					 	max-height="400"
+					 	resizable="false"
+					 	showEffect="explode"
+					 	hideEffect="fold">
+					 	<p:outputPanel id="etudiantDetail" style="text-align:center;font-weight:bold">
+				            <p:panelGrid style="width:100%"  columns="2" columnClasses="label,value">
+				                 
+				                <h:outputText value="Id:" />
+				                <h:outputText value="#{etudiantBean.etudiant.id}" />
+				 
+				 				<h:outputText value="Prenom:" />
+				                <h:outputText value="#{etudiantBean.etudiant.prenom}"/>
+				             
+				                <h:outputText value="Nom:" />
+				                <h:outputText value="#{etudiantBean.etudiant.nom}" />
+				                
+				                <h:outputText value="CNE:" />
+				                <h:outputText value="#{etudiantBean.etudiant.cne}" />
+				 
+				                <h:outputText value="Filiere:" />
+				                <h:outputText value="#{etudiantBean.etudiant.filiere.code}"/>
+				            </p:panelGrid>
+			        	</p:outputPanel>
+			</p:dialog>
+			
+			<p:dialog  	widgetVar="filiereDialog"
+					 	header="Filiere"
+					 	width="400"
+					 	height="auto"
+					 	modal="true"
+					 	resizable="false"
+					 	showEffect="explode"
+					 	hideEffect="fold">
+					 	<p:outputPanel id="filiereDetail" style="text-align:center;font-weight:bold">
+				            <p:panelGrid style="width:100%"  columns="2" columnClasses="label,value">
+				                 
+				                <h:outputText value="Id:" />
+				                <h:outputText value="#{filiereBean.viewFiliere.id}" />
+				                
+				                <h:outputText value="Code:" />
+				                <h:outputText value="#{filiereBean.viewFiliere.code}" />
+				 
+				                <h:outputText value="Libelle:" />
+				                <h:outputText value="#{filiereBean.viewFiliere.libelle}"/>
+				            </p:panelGrid>
+			        	</p:outputPanel>
+			</p:dialog>
+			
+			<p:dialog  	widgetVar="userDialog"
+					 	header="User"
+					 	width="400"
+					 	height="auto"
+					 	modal="true"
+					 	resizable="false"
+					 	showEffect="explode"
+					 	hideEffect="fold">
+					 	<p:outputPanel id="userDetail" style="text-align:center;font-weight:bold">
+				            <p:panelGrid style="width:100%"  columns="2" columnClasses="label,value">
+				                 
+				                <h:outputText value="Id:" />
+				                <h:outputText value="#{userBean.viewUser.id}" />
+				                
+				                <h:outputText value="Nom:" />
+				                <h:outputText value="#{userBean.viewUser.nom}" />
+				 
+				                <h:outputText value="Prenom:" />
+				                <h:outputText value="#{userBean.viewUser.prenom}"/>
+				                
+				                <h:outputText value="Login:" />
+				                <h:outputText value="#{userBean.viewUser.login}"/>
+				                
+				                <h:outputText value="Derniere Connexion:" />
+				                <h:outputText value="#{userBean.viewUser.lastLogin}"/>
+				            </p:panelGrid>
+			        	</p:outputPanel>
+			</p:dialog>
+			
+			
+			
+		</h:form>
+	</ui:composition>
+</html>

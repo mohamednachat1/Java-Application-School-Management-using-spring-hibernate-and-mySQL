@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition>
+		<p:panel header="Liste des etudiants" style="margin-bottom:10px;width:100%;text-align:center;font-weight:bold" id="panel-etudiant-List">
+		 	<p:dataTable id="tableEtudiant" var="etudiant" value="#{etudiantBean.etudiants}" widgetVar="carsTable" multiViewState="true"
+		                 rows="10" paginator="true"
+		                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		                 rowsPerPageTemplate="5,10,15"
+		                 selectionMode="single" 
+		                 selection="#{etudiantBean.etudiantSelected}" 
+		                 rowKey="#{etudiant.id}"
+		                 emptyMessage="Aucune etudiant exist" 
+		                 filteredValue="#{etudiantBean.etudiantsFilitred}">
+		                 
+		        <p:column headerText="Id" filterBy="#{etudiant.id}" sortBy="#{etudiant.id}" filterMatchMode="contains">
+		            <h:outputText value="#{etudiant.id}" />
+		        </p:column>
+		 
+		        <p:column headerText="CNE" filterBy="#{etudiant.cne}" sortBy="#{etudiant.cne}" filterMatchMode="startsWith">
+		            <h:outputText value="#{etudiant.cne}" />
+		        </p:column>
+		 
+		        <p:column headerText="Nom" filterBy="#{etudiant.nom}" sortBy="#{etudiant.nom}" filterMatchMode="startsWith">
+		            <h:outputText value="#{etudiant.nom}" />
+		        </p:column>
+		 
+		        <p:column headerText="Prenom" filterBy="#{etudiant.prenom}" sortBy="#{etudiant.prenom}" filterMatchMode="startsWith">
+		            <h:outputText value="#{etudiant.prenom}" />
+		        </p:column>
+		        
+		        <p:column headerText="Filiere" filterBy="#{etudiant.filiere.code}" sortBy="#{etudiant.filiere.code}" filterMatchMode="startsWith">
+		            <h:outputText value="#{etudiant.filiere.code}" />
+		        </p:column>
+		     
+		     <p:column headerText="Options" style="text-align:center" exportable="false">
+    				<p:commandButton update="etudiantDetail"
+    								 id="btn-view" 
+    								 style="margin-right:10px;" 
+    								 icon="pi pi-eye" 
+    								 title="Quick view"
+    								 oncomplete="PF('etudiantDialog').show()">
+				                     <f:setPropertyActionListener value="#{etudiant}" target="#{etudiantBean.etudiant}" />
+					</p:commandButton>
+					
+					<p:commandButton 
+    								 id="btn-edit"
+    								 icon="pi pi-pencil"
+    								 style="margin-right:10px;" 
+    								 title="Edit" >
+ 									 <p:ajax update="mainPanel" listener="#{etudiantBean.showHandler(etudiant)}" />
+					</p:commandButton>
+				     
+				     <p:commandButton icon="pi pi-trash" 
+				     				  action="#{etudiantBean.deleteEtudiant(etudiant)}" 
+				     				  id="btn-delete"
+				     				  update="mainPanel,mygrowl"
+				     				  title="Delete">
+				        <p:confirm header="Confirmation" message="Voulez-vous vraiment supprimer l'etudiant?" icon="pi pi-exclamation-triangle" />
+				    </p:commandButton>
+								     
+				    <p:confirmDialog 	global="true" 
+				    					showEffect="fade" 
+				    					hideEffect="fade">
+				    					<div style="text-align:center">
+				    						<p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+				        					<p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+				    					</div>
+				        
+				    </p:confirmDialog>   
+									
+		        </p:column>
+		     
+		    </p:dataTable>
+	    </p:panel>
+	</ui:composition>
+</body>
+</html>

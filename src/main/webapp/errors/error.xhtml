@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+<style>
+.containerError{
+	width:50%;
+	margin-left:25%;
+	height:auto;
+	margin-top:150px;
+	border-radius: 10px;
+	background-color: #6cd7c7;
+}
+</style>
+</h:head> 
+<body> 
+	<div class="containerError">
+		<h:panelGrid 	columns="2" 
+        				cellpadding="5"
+        				style="text-align:left;">
+			<h:panelGroup style="position:relative" id="panelGroup">
+			<a href="../">
+				<p:graphicImage alt="Logos" url="../resources/images/GEcole.png" style="width:350px" />
+			</a>
+			<p>
+				<b>500.</b> <u>That's an error.</u>
+			</p>
+			<p>
+				An internal server error has occured.
+				<br />
+				Please try again		 
+			</p>
+			</h:panelGroup>
+			<h:panelGroup style="position:relative" id="panelGroup">
+				<p:graphicImage alt="Logos" url="../resources/images/500_error.png" style="width:100%;" />
+			</h:panelGroup>
+		</h:panelGrid>
+	</div>
+
+</body> 
+</html>

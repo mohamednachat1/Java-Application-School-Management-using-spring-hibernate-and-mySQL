@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition>
+		<p:fragment>
+			<p:panel header="#{filiereBean.form_label} une Filiere"
+					 style="margin-bottom:10px;width:100%;text-align:center;font-weight:bold">
+		        <h:panelGrid 	columns="2" 
+		        				cellpadding="5"
+		        				width="70%" 
+		        				style="text-align:left;margin-left:15%;"
+		        				id="panel-filiere">
+		        	<p:outputLabel for="id-filiere" value="ID" />
+					<p:inputText type="text" 
+								 name="id" 
+								 disabled="true" 
+								 id="id-filiere"
+								 value="#{filiereBean.filiere.id}"
+								 style="width:100%;" 
+								 required="true"/>
+								 
+					<p:outputLabel for="libelle-filiere" value="Libelle" />
+					<p:inputText 	id="libelle-filiere" 
+									required="true" 
+									value="#{filiereBean.filiere.libelle}" 
+									style="width:100%;"/>
+									
+					<p:outputLabel for="code-filiere" value="Code" />
+					<p:inputText 	id="code-filiere" 
+									required="true" 
+									value="#{filiereBean.filiere.code}" 
+									style="width:100%;"/>
+									
+				</h:panelGrid>
+				<p:separator />
+				<div style="text-align: right;width:100%">
+					<p:commandButton value="#{filiereBean.button_label}" 
+									 action="#{filiereBean.save()}" 
+									 id="btn-submit-filiere" 
+									 style="text-align:right"
+									 update="mygrowl,panel-filiere,mainPanel"/>
+				</div>
+			</p:panel>
+		</p:fragment>
+	</ui:composition>
+</body>
+</html>
